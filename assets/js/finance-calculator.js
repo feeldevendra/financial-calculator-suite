@@ -1,125 +1,128 @@
 jQuery(document).ready(function($) {
+    // Modal container
+    var $modal = $('#fcs-modal');
 
-    /* =============================
-       1. List of Calculators
-       ============================= */
-    const calculators = [
-        { id: 'sip', name: 'SIP Calculator', category: 'sip', template: 'sip-calculator.html' },
-        { id: 'lumpsum', name: 'Lumpsum Calculator', category: 'fd_rd', template: 'lumpsum-calculator.html' },
-        { id: 'loan', name: 'Loan Calculator', category: 'loan', template: 'loan-calculator.html' },
-        { id: 'goal', name: 'Goal Planner', category: 'goal', template: 'goal-planner.html' },
-        { id: 'analyze-sip', name: 'Analyze SIP', category: 'sip', template: 'analyze-sip.html' },
-        { id: 'compare-sip', name: 'Compare SIP', category: 'sip', template: 'compare-sip.html' },
-        { id: 'quick-sip', name: 'Quick SIP', category: 'sip', template: 'quick-sip.html' },
-        { id: 'sip-delay', name: 'SIP Delay Cost', category: 'sip', template: 'sip-delay.html' },
-        { id: 'tenure', name: 'Tenure Calculator', category: 'misc', template: 'tenure-calculator.html' },
-        { id: 'stp', name: 'STP Calculator', category: 'swp_stp', template: 'stp-calculator.html' },
-        { id: 'swp', name: 'SWP Calculator', category: 'swp_stp', template: 'swp-calculator.html' },
-        { id: 'loan-sip', name: 'Loan + SIP', category: 'loan', template: 'loan-sip-calculator.html' },
-        { id: 'fd', name: 'FD Calculator', category: 'fd_rd', template: 'fd-calculator.html' },
-        { id: 'rd', name: 'RD Calculator', category: 'fd_rd', template: 'rd-calculator.html' },
-        { id: 'smoke-cost', name: 'Smoke Cost Calculator', category: 'misc', template: 'smoke-cost-calculator.html' },
-        { id: 'sip-swp', name: 'SIP + SWP Calculator', category: 'swp_stp', template: 'sip-swp-calculator.html' },
-    ];
-
-    const pluginURL = fcs_vars.plugin_url || '';
-
-    /* =============================
-       2. Render Calculator Cards
-       ============================= */
-    function renderCards(filter = 'all') {
-        const $grid = $('.fcs-calculator-grid');
-        $grid.empty();
-        calculators.forEach(calc => {
-            if (filter === 'all' || calc.category === filter) {
-                const card = `<div class="fcs-calculator-card" data-id="${calc.id}" data-template="${calc.template}">
-                                <h3>${calc.name}</h3>
-                                <p>Click to open</p>
-                              </div>`;
-                $grid.append(card);
-            }
-        });
+    // Function to open modal with selected calculator template
+    function openCalculator(templateId) {
+        var templateHtml = $('#' + templateId).html();
+        $modal.find('.fcs-modal-content').html(templateHtml);
+        $modal.fadeIn();
     }
 
-    renderCards(); // Initial render all
-
-    /* =============================
-       3. Category Filter
-       ============================= */
-    $('.fcs-cat-btn').on('click', function() {
-        const category = $(this).data('category');
-        renderCards(category);
-    });
-
-    /* =============================
-       4. Search Filter
-       ============================= */
-    $('#fcs-search').on('input', function() {
-        const search = $(this).val().toLowerCase();
-        $('.fcs-calculator-card').each(function() {
-            const name = $(this).find('h3').text().toLowerCase();
-            $(this).toggle(name.includes(search));
-        });
-    });
-
-    /* =============================
-       5. Modal Logic
-       ============================= */
-    const $modal = $('#fcs-modal');
-    const $modalBody = $modal.find('.fcs-modal-body');
-
-    // Open modal
-    $(document).on('click', '.fcs-calculator-card', function() {
-        const templateFile = $(this).data('template');
-        $.get(pluginURL + 'templates/' + templateFile, function(data) {
-            $modalBody.html(data);
-            $modal.fadeIn();
-        });
-    });
-
     // Close modal
-    $('.fcs-close, .fcs-modal').on('click', function(e) {
-        if (e.target !== this && !$(e.target).hasClass('fcs-close')) return;
-        $modal.fadeOut(function() {
-            $modalBody.empty();
-        });
+    $modal.on('click', '.fcs-modal-close', function() {
+        $modal.fadeOut();
+        $modal.find('.fcs-modal-content').html('');
     });
 
-    /* =============================
-       6. Example Calculation Functions
-       ============================= */
-    // SIP Calculator
+    // Handle calculator button clicks
+    $('.fcs-calculator-btn').on('click', function() {
+        var calcId = $(this).data('calc');
+        openCalculator(calcId);
+    });
+
+    /** -----------------------------
+     * CALCULATOR LOGIC FUNCTIONS
+     * -----------------------------
+     */
+
+    // Helper: Compound Interest
+    function compoundInterest(principal, rate, time, freq) {
+        var n = freq; // times compounded per year
+        return principal * Math.pow((1 + rate / 100 / n), n * time);
+    }
+
+    // Helper: Format currency
+    function formatCurrency(num) {
+        return '₹' + parseFloat(num).toLocaleString('en-IN', {maximumFractionDigits: 2});
+    }
+
+    /** -----------------------------
+     * SIP Calculator
+     * -----------------------------
+     */
     $(document).on('click', '#fcs-calc-sip', function() {
-        const P = parseFloat($('#sip-investment').val());
-        const r = parseFloat($('#sip-return').val()) / 100 / 12;
-        const n = parseFloat($('#sip-period').val()) * 12;
+        var investment = parseFloat($('#sip-investment').val()) || 0;
+        var rate = parseFloat($('#sip-return').val()) || 0;
+        var period = parseFloat($('#sip-period').val()) || 0;
+        var freq = 12; // monthly
+        var months = period * 12;
+        var maturity = 0;
 
-        if (isNaN(P) || isNaN(r) || isNaN(n)) {
-            alert('Please enter valid numbers');
-            return;
+        for (var i = 1; i <= months; i++) {
+            maturity += investment * Math.pow(1 + rate / 100 / 12, months - i + 1);
         }
 
-        // SIP formula FV = P * ((1+r)^n - 1)/r * (1+r)
-        const FV = P * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
+        $('#sip-result').html('Maturity Amount: ' + formatCurrency(maturity));
 
-        $('#sip-result').text('Future Value: ₹' + FV.toFixed(2));
-
-        // Line chart for growth
-        const labels = [];
-        const data = [];
-        for (let i = 1; i <= n; i++) {
-            labels.push(i);
-            data.push(P * ((Math.pow(1 + r, i) - 1) / r) * (1 + r));
-        }
-
-        const ctx = document.getElementById('sip-chart').getContext('2d');
-        if (window.sipChart) window.sipChart.destroy();
-        window.sipChart = new Chart(ctx, {
+        // Chart
+        var ctx = document.getElementById('sip-line-chart').getContext('2d');
+        new Chart(ctx, {
             type: 'line',
-            data: { labels: labels, datasets: [{ label: 'SIP Growth', data: data, borderColor: '#43e97b', fill: true, backgroundColor: 'rgba(67,233,123,0.2)' }] },
-            options: { responsive: true, plugins: { legend: { display: true } } }
+            data: {
+                labels: Array.from({length: months}, (_, i) => i + 1),
+                datasets: [{
+                    label: 'SIP Growth',
+                    data: Array.from({length: months}, (_, i) => investment * (i + 1)),
+                    borderColor: '#43e97b',
+                    fill: false,
+                    tension: 0.3
+                }]
+            }
+        });
+
+        // Pie Chart: Invested vs Returns
+        var invested = investment * months;
+        var returns = maturity - invested;
+        var ctxPie = document.getElementById('sip-pie-chart').getContext('2d');
+        new Chart(ctxPie, {
+            type: 'pie',
+            data: {
+                labels: ['Invested', 'Returns'],
+                datasets: [{
+                    data: [invested, returns],
+                    backgroundColor: ['#38f9d7','#4facfe']
+                }]
+            }
         });
     });
 
-    // Placeholder: Similar functions will be added for all other calculators
+    /** -----------------------------
+     * Other calculators' logic will follow similar structure
+     * Each button click event with ID triggers calculation and charts
+     * -----------------------------
+     */
+
+    // Example: Lumpsum Calculator
+    $(document).on('click', '#fcs-calc-lumpsum', function() {
+        var principal = parseFloat($('#lumpsum-amount').val()) || 0;
+        var rate = parseFloat($('#lumpsum-return').val()) || 0;
+        var period = parseFloat($('#lumpsum-period').val()) || 0;
+        var freq = 1; // yearly compounding
+        var maturity = compoundInterest(principal, rate, period, freq);
+        $('#lumpsum-result').html('Maturity Amount: ' + formatCurrency(maturity));
+
+        // Charts
+        var ctx = document.getElementById('lumpsum-line-chart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: Array.from({length: period}, (_, i) => i + 1),
+                datasets: [{
+                    label: 'Growth',
+                    data: Array.from({length: period}, (_, i) => compoundInterest(principal, rate, i+1, freq)),
+                    borderColor: '#43e97b',
+                    fill: false
+                }]
+            }
+        });
+    });
+
+    /** -----------------------------
+     * Fallback for missing Chart.js
+     * -----------------------------
+     */
+    if (typeof Chart === 'undefined') {
+        console.warn('Chart.js not loaded. Charts will not render.');
+    }
 });
