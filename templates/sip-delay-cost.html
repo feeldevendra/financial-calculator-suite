@@ -1,0 +1,44 @@
+<div class="fcs-calculator-template">
+    <h2>SIP Delay Cost Calculator</h2>
+
+    <!-- Inputs -->
+    <div class="fcs-input-group">
+        <label>Monthly Investment (₹)</label>
+        <input type="number" id="sip-delay-investment" placeholder="Enter monthly SIP" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Expected Return (%)</label>
+        <input type="number" id="sip-delay-return" placeholder="Annual return rate" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Investment Period</label>
+        <input type="number" id="sip-delay-period" placeholder="Enter duration" />
+        <select id="sip-delay-period-type">
+            <option value="year">Years</option>
+            <option value="month">Months</option>
+        </select>
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Delay Period</label>
+        <input type="number" id="sip-delay-duration" placeholder="Enter delay" />
+        <select id="sip-delay-duration-type">
+            <option value="year">Years</option>
+            <option value="month">Months</option>
+            <option value="week">Weeks</option>
+            <option value="day">Days</option>
+        </select>
+    </div>
+
+    <!-- Button -->
+    <button id="fcs-calc-sip-delay">Calculate</button>
+
+    <!-- Results -->
+    <div id="sip-delay-result" style="margin-top:20px; font-weight:bold;"></div>
+
+    <!-- Charts -->
+    <canvas id="sip-delay-line-chart"></canvas>
+    <canvas id="sip-delay-pie-chart"></canvas>
+</div>
