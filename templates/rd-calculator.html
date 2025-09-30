@@ -1,0 +1,64 @@
+<div class="fcs-calculator-template">
+    <h2>RD Calculator</h2>
+
+    <!-- Inputs -->
+    <div class="fcs-input-group">
+        <label>Recurring Investment (₹)</label>
+        <input type="number" id="rd-amount" placeholder="Enter recurring deposit" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Rate of Interest (% per annum)</label>
+        <input type="number" id="rd-rate" placeholder="Annual interest rate" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Investment Period</label>
+        <input type="number" id="rd-period" placeholder="Enter period" />
+        <select id="rd-period-type">
+            <option value="year">Years</option>
+            <option value="month">Months</option>
+        </select>
+    </div>
+
+    <!-- Advanced Options -->
+    <div class="fcs-input-group">
+        <label>Investment Frequency</label>
+        <select id="rd-frequency">
+            <option value="monthly">Monthly</option>
+            <option value="quarterly">Quarterly</option>
+            <option value="halfyearly">Half-Yearly</option>
+            <option value="yearly">Yearly</option>
+        </select>
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Compound Frequency</label>
+        <select id="rd-compound">
+            <option value="monthly">Monthly</option>
+            <option value="quarterly">Quarterly</option>
+            <option value="halfyearly">Half-Yearly</option>
+            <option value="yearly">Yearly</option>
+        </select>
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Inflation Rate (%)</label>
+        <input type="number" id="rd-inflation" placeholder="Optional inflation rate" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>RD Start Date</label>
+        <input type="date" id="rd-start-date" />
+    </div>
+
+    <!-- Button -->
+    <button id="fcs-calc-rd">Calculate</button>
+
+    <!-- Results -->
+    <div id="rd-result" style="margin-top:20px; font-weight:bold;"></div>
+
+    <!-- Charts -->
+    <canvas id="rd-line-chart"></canvas>
+    <canvas id="rd-pie-chart"></canvas>
+</div>
