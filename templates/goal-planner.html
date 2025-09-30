@@ -1,0 +1,148 @@
+<div class="fcs-calculator-template">
+    <h2>Goal Planner</h2>
+
+    <!-- Tabs for multiple goals -->
+    <div class="fcs-goal-tabs">
+        <button class="fcs-goal-tab-btn" data-goal="education">Education</button>
+        <button class="fcs-goal-tab-btn" data-goal="marriage">Marriage</button>
+        <button class="fcs-goal-tab-btn" data-goal="retirement">Retirement</button>
+        <button class="fcs-goal-tab-btn" data-goal="dream-house">Dream House</button>
+        <button class="fcs-goal-tab-btn" data-goal="car">Car</button>
+        <button class="fcs-goal-tab-btn" data-goal="vacation">Vacation</button>
+        <button class="fcs-goal-tab-btn" data-goal="other">Other Goals</button>
+    </div>
+
+    <!-- Goal Sections -->
+    <div class="fcs-goal-section" id="goal-education">
+        <h3>Education Planner</h3>
+        <div class="fcs-input-group">
+            <label>Target Amount (₹)</label>
+            <input type="number" id="edu-target" placeholder="Enter target amount" />
+        </div>
+        <div class="fcs-input-group">
+            <label>Investment Period (Years)</label>
+            <input type="number" id="edu-period" placeholder="Enter period in years" />
+        </div>
+        <div class="fcs-input-group">
+            <label>Expected Return (%)</label>
+            <input type="number" id="edu-return" placeholder="Enter expected return" />
+        </div>
+        <button id="fcs-calc-education">Calculate</button>
+        <div id="edu-result" style="margin-top:20px; font-weight:bold;"></div>
+        <canvas id="edu-chart"></canvas>
+    </div>
+
+    <div class="fcs-goal-section" id="goal-marriage" style="display:none;">
+        <h3>Marriage Planner</h3>
+        <div class="fcs-input-group">
+            <label>Target Amount (₹)</label>
+            <input type="number" id="marriage-target" placeholder="Enter target amount" />
+        </div>
+        <div class="fcs-input-group">
+            <label>Investment Period (Years)</label>
+            <input type="number" id="marriage-period" placeholder="Enter period in years" />
+        </div>
+        <div class="fcs-input-group">
+            <label>Expected Return (%)</label>
+            <input type="number" id="marriage-return" placeholder="Enter expected return" />
+        </div>
+        <button id="fcs-calc-marriage">Calculate</button>
+        <div id="marriage-result" style="margin-top:20px; font-weight:bold;"></div>
+        <canvas id="marriage-chart"></canvas>
+    </div>
+
+    <div class="fcs-goal-section" id="goal-retirement" style="display:none;">
+        <h3>Retirement Planner</h3>
+        <div class="fcs-input-group">
+            <label>Target Amount (₹)</label>
+            <input type="number" id="retirement-target" placeholder="Enter target amount" />
+        </div>
+        <div class="fcs-input-group">
+            <label>Investment Period (Years)</label>
+            <input type="number" id="retirement-period" placeholder="Enter period in years" />
+        </div>
+        <div class="fcs-input-group">
+            <label>Expected Return (%)</label>
+            <input type="number" id="retirement-return" placeholder="Enter expected return" />
+        </div>
+        <button id="fcs-calc-retirement">Calculate</button>
+        <div id="retirement-result" style="margin-top:20px; font-weight:bold;"></div>
+        <canvas id="retirement-chart"></canvas>
+    </div>
+
+    <div class="fcs-goal-section" id="goal-dream-house" style="display:none;">
+        <h3>Dream House Planner</h3>
+        <div class="fcs-input-group">
+            <label>Target Amount (₹)</label>
+            <input type="number" id="house-target" placeholder="Enter target amount" />
+        </div>
+        <div class="fcs-input-group">
+            <label>Investment Period (Years)</label>
+            <input type="number" id="house-period" placeholder="Enter period in years" />
+        </div>
+        <div class="fcs-input-group">
+            <label>Expected Return (%)</label>
+            <input type="number" id="house-return" placeholder="Enter expected return" />
+        </div>
+        <button id="fcs-calc-house">Calculate</button>
+        <div id="house-result" style="margin-top:20px; font-weight:bold;"></div>
+        <canvas id="house-chart"></canvas>
+    </div>
+
+    <div class="fcs-goal-section" id="goal-car" style="display:none;">
+        <h3>Car Planner</h3>
+        <div class="fcs-input-group">
+            <label>Target Amount (₹)</label>
+            <input type="number" id="car-target" placeholder="Enter target amount" />
+        </div>
+        <div class="fcs-input-group">
+            <label>Investment Period (Years)</label>
+            <input type="number" id="car-period" placeholder="Enter period in years" />
+        </div>
+        <div class="fcs-input-group">
+            <label>Expected Return (%)</label>
+            <input type="number" id="car-return" placeholder="Enter expected return" />
+        </div>
+        <button id="fcs-calc-car">Calculate</button>
+        <div id="car-result" style="margin-top:20px; font-weight:bold;"></div>
+        <canvas id="car-chart"></canvas>
+    </div>
+
+    <div class="fcs-goal-section" id="goal-vacation" style="display:none;">
+        <h3>Vacation Planner</h3>
+        <div class="fcs-input-group">
+            <label>Target Amount (₹)</label>
+            <input type="number" id="vacation-target" placeholder="Enter target amount" />
+        </div>
+        <div class="fcs-input-group">
+            <label>Investment Period (Years)</label>
+            <input type="number" id="vacation-period" placeholder="Enter period in years" />
+        </div>
+        <div class="fcs-input-group">
+            <label>Expected Return (%)</label>
+            <input type="number" id="vacation-return" placeholder="Enter expected return" />
+        </div>
+        <button id="fcs-calc-vacation">Calculate</button>
+        <div id="vacation-result" style="margin-top:20px; font-weight:bold;"></div>
+        <canvas id="vacation-chart"></canvas>
+    </div>
+
+    <div class="fcs-goal-section" id="goal-other" style="display:none;">
+        <h3>Other Goals Planner</h3>
+        <div class="fcs-input-group">
+            <label>Target Amount (₹)</label>
+            <input type="number" id="other-target" placeholder="Enter target amount" />
+        </div>
+        <div class="fcs-input-group">
+            <label>Investment Period (Years)</label>
+            <input type="number" id="other-period" placeholder="Enter period in years" />
+        </div>
+        <div class="fcs-input-group">
+            <label>Expected Return (%)</label>
+            <input type="number" id="other-return" placeholder="Enter expected return" />
+        </div>
+        <button id="fcs-calc-other">Calculate</button>
+        <div id="other-result" style="margin-top:20px; font-weight:bold;"></div>
+        <canvas id="other-chart"></canvas>
+    </div>
+</div>
