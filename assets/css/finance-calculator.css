@@ -1,183 +1,241 @@
-/* ===== Root & Brand Variables ===== */
+/* ==============================
+   Financial Calculator Suite CSS
+   ============================== */
+
+/* --- Root Variables --- */
 :root {
-    --fcs-primary: #43e97b;
-    --fcs-secondary: #4facfe;
-    --fcs-radius: 12px;
+    --fcs-primary-color: #43e97b;
+    --fcs-secondary-color: #4facfe;
+    --fcs-bg-color: #ffffff;
     --fcs-shadow: 0 8px 24px rgba(0,0,0,0.12);
-    --fcs-font: 'Poppins', sans-serif;
+    --fcs-radius: 12px;
+    --fcs-font: 'Roboto', sans-serif;
 }
 
-/* ===== Body & Typography ===== */
-.fcs-calculator-template {
+/* --- Global Styles --- */
+.fcs-calculator-container {
     font-family: var(--fcs-font);
-    color: #333;
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 20px;
+    color: #333;
 }
 
-.fcs-calculator-template h2 {
-    font-size: 1.8rem;
-    color: var(--fcs-primary);
+/* --- Search Bar --- */
+.fcs-search-bar {
     margin-bottom: 20px;
     text-align: center;
 }
 
-/* ===== Input Fields ===== */
-.fcs-input-group {
-    margin-bottom: 15px;
-    display: flex;
-    flex-direction: column;
-}
-
-.fcs-input-group label {
-    margin-bottom: 5px;
-    font-weight: 500;
-}
-
-.fcs-input-group input,
-.fcs-input-group select {
-    padding: 10px;
-    border: 1px solid #ddd;
+.fcs-search-bar input {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px 15px;
     border-radius: var(--fcs-radius);
+    border: 1px solid #ccc;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.fcs-search-bar input:focus {
+    border-color: var(--fcs-primary-color);
     outline: none;
-    font-size: 1rem;
-    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(67,233,123,0.3);
 }
 
-.fcs-input-group input:focus,
-.fcs-input-group select:focus {
-    border-color: var(--fcs-primary);
-    box-shadow: 0 0 6px rgba(67,233,123,0.3);
+/* --- Category Buttons --- */
+.fcs-categories {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-/* ===== Buttons ===== */
-button {
-    padding: 10px 20px;
-    background: linear-gradient(135deg, var(--fcs-secondary), var(--fcs-primary));
+.fcs-category-btn {
+    background: linear-gradient(135deg, #4facfe, #43e97b);
     color: #fff;
-    font-weight: 600;
     border: none;
     border-radius: var(--fcs-radius);
+    padding: 10px 18px;
+    margin: 5px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.fcs-category-btn:hover {
+    transform: translateY(-3px);
     box-shadow: var(--fcs-shadow);
-    margin-top: 10px;
 }
 
-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 28px rgba(0,0,0,0.2);
+/* --- Calculator Grid --- */
+.fcs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
 }
 
-/* ===== Table Styling ===== */
-.fcs-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-}
-
-.fcs-table th,
-.fcs-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
+.fcs-calculator-item {
+    background: var(--fcs-bg-color);
+    border-radius: var(--fcs-radius);
+    box-shadow: var(--fcs-shadow);
+    padding: 20px;
     text-align: center;
+    transition: 0.3s;
 }
 
-.fcs-table th {
-    background: var(--fcs-primary);
+.fcs-calculator-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+}
+
+/* --- Calculator Buttons --- */
+.fcs-calculator-btn {
+    width: 100%;
+    padding: 12px 0;
+    border: none;
+    border-radius: var(--fcs-radius);
+    background: linear-gradient(135deg, #43e97b, #4facfe);
     color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-/* ===== Modal Styling ===== */
+.fcs-calculator-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--fcs-shadow);
+}
+
+/* --- Modal Styles --- */
 #fcs-modal {
     display: none;
     position: fixed;
-    top: 0;
+    z-index: 9999;
     left: 0;
+    top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.6);
-    z-index: 9999;
     overflow-y: auto;
-    padding: 50px 20px;
+    background: rgba(0,0,0,0.6);
+    transition: 0.3s;
 }
 
 .fcs-modal-content {
     background: #fff;
-    max-width: 900px;
-    margin: auto;
-    border-radius: var(--fcs-radius);
+    margin: 50px auto;
     padding: 30px;
+    border-radius: var(--fcs-radius);
+    max-width: 800px;
     position: relative;
     box-shadow: var(--fcs-shadow);
+    animation: modalFadeIn 0.3s ease-in-out;
 }
 
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Modal Close Button --- */
 .fcs-modal-close {
     position: absolute;
     top: 15px;
-    right: 15px;
-    font-size: 1.5rem;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
     cursor: pointer;
-    color: #999;
+    transition: 0.3s;
 }
 
 .fcs-modal-close:hover {
-    color: var(--fcs-primary);
+    color: var(--fcs-primary-color);
 }
 
-/* ===== Charts ===== */
-canvas {
-    width: 100% !important;
-    max-height: 300px;
+/* --- Calculator Template Inputs --- */
+.fcs-calculator-template {
     margin-top: 20px;
 }
 
-/* ===== Responsive Layout ===== */
-@media (max-width: 768px) {
-    .fcs-calculator-template {
-        padding: 15px;
+.fcs-calculator-template h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--fcs-primary-color);
+}
+
+.fcs-input-group {
+    margin-bottom: 15px;
+}
+
+.fcs-input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.fcs-input-group input, .fcs-input-group select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: var(--fcs-radius);
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.fcs-input-group input:focus, .fcs-input-group select:focus {
+    border-color: var(--fcs-primary-color);
+    outline: none;
+    box-shadow: 0 0 10px rgba(67,233,123,0.3);
+}
+
+/* --- Result Display --- */
+.fcs-calculator-template #sip-result,
+.fcs-calculator-template #lumpsum-result,
+.fcs-calculator-template #loan-result {
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--fcs-secondary-color);
+    text-align: center;
+}
+
+/* --- Charts --- */
+.fcs-calculator-template canvas {
+    margin-top: 20px;
+    width: 100% !important;
+    height: 300px !important;
+    border-radius: var(--fcs-radius);
+}
+
+/* --- Buttons inside calculator templates --- */
+.fcs-calculator-template button {
+    width: 100%;
+    padding: 12px 0;
+    border: none;
+    border-radius: var(--fcs-radius);
+    background: linear-gradient(135deg, #43e97b, #4facfe);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.fcs-calculator-template button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--fcs-shadow);
+}
+
+/* --- Responsive --- */
+@media(max-width: 768px) {
+    .fcs-modal-content {
+        margin: 20px;
+        padding: 20px;
     }
 
-    button {
-        width: 100%;
-    }
-
-    .fcs-input-group input,
-    .fcs-input-group select {
-        font-size: 0.9rem;
-        padding: 8px;
+    .fcs-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 15px;
     }
 }
-
-/* ===== Table Actions Buttons ===== */
-.fcs-table button {
-    padding: 5px 10px;
-    font-size: 0.85rem;
-    margin: 2px;
-}
-
-/* ===== Animations ===== */
-.fcs-calculator-template,
-.fcs-modal-content {
-    animation: fadeInUp 0.6s ease forwards;
-}
-
-@keyframes fadeInUp {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* ===== Misc Styling ===== */
-#compare-sip-table tbody tr:nth-child(even) {
-    background: #f7f7f7;
-}
-
-#compare-sip-table tbody tr:hover {
-    background: #e0f7f2;
-}
-
