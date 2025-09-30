@@ -1,0 +1,29 @@
+<div class="fcs-calculator-template">
+    <h2>Tenure Calculator</h2>
+
+    <!-- Inputs -->
+    <div class="fcs-input-group">
+        <label>Target Amount (₹)</label>
+        <input type="number" id="tenure-target" placeholder="Enter goal amount" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Monthly Investment (₹)</label>
+        <input type="number" id="tenure-investment" placeholder="Enter SIP amount" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Expected Return (%)</label>
+        <input type="number" id="tenure-return" placeholder="Annual return rate" />
+    </div>
+
+    <!-- Button -->
+    <button id="fcs-calc-tenure">Calculate</button>
+
+    <!-- Results -->
+    <div id="tenure-result" style="margin-top:20px; font-weight:bold;"></div>
+
+    <!-- Charts -->
+    <canvas id="tenure-line-chart"></canvas>
+    <canvas id="tenure-pie-chart"></canvas>
+</div>
