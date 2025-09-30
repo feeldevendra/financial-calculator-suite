@@ -1,0 +1,59 @@
+<div class="fcs-calculator-template">
+    <h2>SWP Calculator</h2>
+
+    <!-- Inputs -->
+    <div class="fcs-input-group">
+        <label>SWP Amount (₹)</label>
+        <input type="number" id="swp-amount" placeholder="Enter withdrawal amount" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Withdrawal Frequency</label>
+        <select id="swp-frequency">
+            <option value="monthly">Monthly</option>
+            <option value="bimonthly">Bi-Monthly</option>
+            <option value="quarterly">Quarterly</option>
+            <option value="halfyearly">Half-Yearly</option>
+            <option value="yearly">Yearly</option>
+        </select>
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Initial Investment (₹)</label>
+        <input type="number" id="swp-initial" placeholder="Enter initial investment" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Withdrawal Period</label>
+        <input type="number" id="swp-period" placeholder="Enter period" />
+        <select id="swp-period-type">
+            <option value="year">Years</option>
+            <option value="month">Months</option>
+        </select>
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Expected Return (%)</label>
+        <input type="number" id="swp-return" placeholder="Annual return rate" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>SWP Start Date</label>
+        <input type="date" id="swp-start-date" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Top-up Percentage (%)</label>
+        <input type="number" id="swp-topup" placeholder="Optional top-up %" />
+    </div>
+
+    <!-- Button -->
+    <button id="fcs-calc-swp">Calculate</button>
+
+    <!-- Results -->
+    <div id="swp-result" style="margin-top:20px; font-weight:bold;"></div>
+
+    <!-- Charts -->
+    <canvas id="swp-line-chart"></canvas>
+    <canvas id="swp-pie-chart"></canvas>
+</div>
