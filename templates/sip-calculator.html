@@ -1,0 +1,83 @@
+<div class="fcs-calculator-template">
+    <h2>SIP Calculator</h2>
+
+    <!-- Basic Inputs -->
+    <div class="fcs-input-group">
+        <label>Monthly Investment (₹)</label>
+        <input type="number" id="sip-investment" placeholder="Enter monthly investment" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Expected Return (%)</label>
+        <input type="number" id="sip-return" placeholder="Enter expected annual return" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Expense Ratio (%)</label>
+        <input type="number" id="sip-expense" placeholder="Enter expense ratio" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Investment Period</label>
+        <input type="number" id="sip-period" placeholder="Enter period in years" />
+        <select id="sip-period-type">
+            <option value="year">Yearly</option>
+            <option value="month">Monthly</option>
+        </select>
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Compound Frequency</label>
+        <select id="sip-frequency">
+            <option value="monthly">Monthly</option>
+            <option value="quarterly">Quarterly</option>
+            <option value="half-yearly">Half Yearly</option>
+            <option value="yearly">Yearly</option>
+        </select>
+    </div>
+
+    <!-- Advanced Options -->
+    <div class="fcs-advanced-options">
+        <label><input type="checkbox" id="sip-deposit-same" /> Deposit period same as investment period</label>
+    </div>
+
+    <div id="sip-advanced-section">
+        <!-- Advanced conditional inputs shown via JS if checkbox checked -->
+        <div class="fcs-input-group">
+            <label>Initial Investment (₹)</label>
+            <input type="number" id="sip-initial" placeholder="Enter initial investment" />
+        </div>
+
+        <div class="fcs-input-group">
+            <label>Inflation Rate (%)</label>
+            <input type="number" id="sip-inflation" placeholder="Enter inflation rate" />
+        </div>
+
+        <div class="fcs-input-group">
+            <label>Top-up Option</label>
+            <input type="number" id="sip-topup" placeholder="Amount or percentage" />
+            <select id="sip-topup-type">
+                <option value="amount">Amount</option>
+                <option value="percentage">Percentage</option>
+            </select>
+            <select id="sip-topup-frequency">
+                <option value="yearly">Yearly</option>
+                <option value="half-yearly">Half Yearly</option>
+            </select>
+        </div>
+
+        <div class="fcs-input-group">
+            <label>SIP Start Date</label>
+            <input type="date" id="sip-start-date" />
+        </div>
+    </div>
+
+    <!-- Calculate Button -->
+    <button id="fcs-calc-sip">Calculate</button>
+
+    <!-- Results -->
+    <div id="sip-result" style="margin-top:20px; font-weight:bold;"></div>
+
+    <!-- Chart -->
+    <canvas id="sip-chart"></canvas>
+</div>
