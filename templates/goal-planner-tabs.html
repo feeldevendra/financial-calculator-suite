@@ -1,0 +1,51 @@
+<!-- ==========================================================
+     Goal Planner Tabs Template
+     Author: Devendra Lodhi / FlyBoost
+     Portfolio: www.devendra.bio
+     Agency: www.flyboost.in
+========================================================== -->
+<div class="fcs-calculator fcs-goal-planner" data-calc="goal">
+
+  <!-- Tabs Navigation -->
+  <div class="fcs-tabs">
+    <button class="fcs-tab-btn active" data-tab="education">Education</button>
+    <button class="fcs-tab-btn" data-tab="marriage">Marriage</button>
+    <button class="fcs-tab-btn" data-tab="retirement">Retirement</button>
+    <button class="fcs-tab-btn" data-tab="dream_house">Dream House</button>
+    <button class="fcs-tab-btn" data-tab="car">Car</button>
+    <button class="fcs-tab-btn" data-tab="vacation">Vacation</button>
+    <button class="fcs-tab-btn" data-tab="other">Other</button>
+  </div>
+
+  <!-- Tabs Content -->
+  <div class="fcs-tabs-content">
+    <!-- Template for each goal -->
+    <div class="fcs-tab-panel active" id="education">
+      <h3>Education Goal Planner</h3>
+      <form class="fcs-goal-form">
+        <label>Target Amount (₹): <input type="number" class="fcs-goal-target" min="0" step="0.01" required></label>
+        <label>Current Savings (₹): <input type="number" class="fcs-goal-current" min="0" step="0.01" value="0"></label>
+        <label>Investment Period (Years): <input type="number" class="fcs-goal-years" min="0" step="1" value="5"></label>
+        <label>Expected Return (%): <input type="number" class="fcs-goal-return" min="0" step="0.01" value="8"></label>
+        <label>Contribution Type:
+          <select class="fcs-goal-contrib">
+            <option value="monthly">Monthly</option>
+            <option value="yearly">Yearly</option>
+          </select>
+        </label>
+        <button type="button" class="fcs-calc-btn" data-calc="goal">Calculate</button>
+      </form>
+      <div class="fcs-results"></div>
+      <canvas class="fcs-chart"></canvas>
+    </div>
+
+    <!-- Clone the above panel for other goals with unique IDs -->
+    <div class="fcs-tab-panel" id="marriage"></div>
+    <div class="fcs-tab-panel" id="retirement"></div>
+    <div class="fcs-tab-panel" id="dream_house"></div>
+    <div class="fcs-tab-panel" id="car"></div>
+    <div class="fcs-tab-panel" id="vacation"></div>
+    <div class="fcs-tab-panel" id="other"></div>
+
+  </div>
+</div>
