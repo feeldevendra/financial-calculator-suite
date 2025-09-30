@@ -1,0 +1,40 @@
+<div class="fcs-calculator-template">
+    <h2>Smoke Cost Calculator</h2>
+
+    <!-- Inputs -->
+    <div class="fcs-input-group">
+        <label>Cigarettes per Day</label>
+        <input type="number" id="smoke-cigs-per-day" placeholder="Enter number of cigarettes per day" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Cost per Cigarette (₹)</label>
+        <input type="number" id="smoke-cost-per-cig" placeholder="Enter cost per cigarette" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Number of Years Smoking</label>
+        <input type="number" id="smoke-years" placeholder="Enter total years" />
+    </div>
+
+    <!-- Advanced Options -->
+    <div class="fcs-input-group">
+        <label>Inflation Rate (%)</label>
+        <input type="number" id="smoke-inflation" placeholder="Optional inflation rate" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Top-up / Additional Costs (₹)</label>
+        <input type="number" id="smoke-topup" placeholder="Optional extra cost" />
+    </div>
+
+    <!-- Button -->
+    <button id="fcs-calc-smoke">Calculate</button>
+
+    <!-- Results -->
+    <div id="smoke-result" style="margin-top:20px; font-weight:bold;"></div>
+
+    <!-- Charts -->
+    <canvas id="smoke-line-chart"></canvas>
+    <canvas id="smoke-pie-chart"></canvas>
+</div>
