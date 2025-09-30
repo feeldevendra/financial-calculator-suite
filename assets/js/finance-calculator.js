@@ -1,12 +1,25 @@
 jQuery(document).ready(function($) {
-    // Modal container
+
+    /** -----------------------------
+     * Modal Handling
+     * -----------------------------
+     */
     var $modal = $('#fcs-modal');
 
-    // Function to open modal with selected calculator template
     function openCalculator(templateId) {
+        // Load template into modal
         var templateHtml = $('#' + templateId).html();
         $modal.find('.fcs-modal-content').html(templateHtml);
+
+        // Add close button if not exists
+        if ($modal.find('.fcs-modal-close').length === 0) {
+            $modal.find('.fcs-modal-content').prepend('<span class="fcs-modal-close">&times;</span>');
+        }
+
         $modal.fadeIn();
+
+        // Attach logic for loaded calculator
+        attachCalculatorLogic(templateId);
     }
 
     // Close modal
@@ -15,114 +28,117 @@ jQuery(document).ready(function($) {
         $modal.find('.fcs-modal-content').html('');
     });
 
-    // Handle calculator button clicks
-    $('.fcs-calculator-btn').on('click', function() {
+    // Calculator button click
+    $(document).on('click', '.fcs-calculator-btn', function() {
         var calcId = $(this).data('calc');
         openCalculator(calcId);
     });
 
     /** -----------------------------
-     * CALCULATOR LOGIC FUNCTIONS
+     * Helpers
      * -----------------------------
      */
-
-    // Helper: Compound Interest
     function compoundInterest(principal, rate, time, freq) {
-        var n = freq; // times compounded per year
-        return principal * Math.pow((1 + rate / 100 / n), n * time);
+        return principal * Math.pow((1 + rate / 100 / freq), freq * time);
     }
 
-    // Helper: Format currency
     function formatCurrency(num) {
         return '₹' + parseFloat(num).toLocaleString('en-IN', {maximumFractionDigits: 2});
     }
 
     /** -----------------------------
-     * SIP Calculator
+     * Generic Chart Functions
      * -----------------------------
      */
-    $(document).on('click', '#fcs-calc-sip', function() {
-        var investment = parseFloat($('#sip-investment').val()) || 0;
-        var rate = parseFloat($('#sip-return').val()) || 0;
-        var period = parseFloat($('#sip-period').val()) || 0;
-        var freq = 12; // monthly
-        var months = period * 12;
-        var maturity = 0;
-
-        for (var i = 1; i <= months; i++) {
-            maturity += investment * Math.pow(1 + rate / 100 / 12, months - i + 1);
-        }
-
-        $('#sip-result').html('Maturity Amount: ' + formatCurrency(maturity));
-
-        // Chart
-        var ctx = document.getElementById('sip-line-chart').getContext('2d');
-        new Chart(ctx, {
+    function drawLineChart(canvasId, labels, data, labelName) {
+        var ctx = document.getElementById(canvasId);
+        if (!ctx) return;
+        new Chart(ctx.getContext('2d'), {
             type: 'line',
             data: {
-                labels: Array.from({length: months}, (_, i) => i + 1),
+                labels: labels,
                 datasets: [{
-                    label: 'SIP Growth',
-                    data: Array.from({length: months}, (_, i) => investment * (i + 1)),
+                    label: labelName,
+                    data: data,
                     borderColor: '#43e97b',
                     fill: false,
                     tension: 0.3
                 }]
-            }
+            },
+            options: { responsive: true, maintainAspectRatio: false }
         });
+    }
 
-        // Pie Chart: Invested vs Returns
-        var invested = investment * months;
-        var returns = maturity - invested;
-        var ctxPie = document.getElementById('sip-pie-chart').getContext('2d');
-        new Chart(ctxPie, {
+    function drawPieChart(canvasId, labels, data) {
+        var ctx = document.getElementById(canvasId);
+        if (!ctx) return;
+        new Chart(ctx.getContext('2d'), {
             type: 'pie',
-            data: {
-                labels: ['Invested', 'Returns'],
-                datasets: [{
-                    data: [invested, returns],
-                    backgroundColor: ['#38f9d7','#4facfe']
-                }]
-            }
+            data: { labels: labels, datasets: [{ data: data, backgroundColor: ['#38f9d7','#4facfe'] }] },
+            options: { responsive: true, maintainAspectRatio: false }
         });
-    });
+    }
 
     /** -----------------------------
-     * Other calculators' logic will follow similar structure
-     * Each button click event with ID triggers calculation and charts
+     * Attach Calculator Logic
      * -----------------------------
      */
+    function attachCalculatorLogic(calcId) {
 
-    // Example: Lumpsum Calculator
-    $(document).on('click', '#fcs-calc-lumpsum', function() {
-        var principal = parseFloat($('#lumpsum-amount').val()) || 0;
-        var rate = parseFloat($('#lumpsum-return').val()) || 0;
-        var period = parseFloat($('#lumpsum-period').val()) || 0;
-        var freq = 1; // yearly compounding
-        var maturity = compoundInterest(principal, rate, period, freq);
-        $('#lumpsum-result').html('Maturity Amount: ' + formatCurrency(maturity));
+        /** --------- SIP Calculator --------- */
+        if (calcId === 'sip-calculator') {
+            $('#fcs-calc-sip').on('click', function() {
+                var investment = parseFloat($('#sip-investment').val()) || 0;
+                var rate = parseFloat($('#sip-return').val()) || 0;
+                var period = parseFloat($('#sip-period').val()) || 0;
+                var months = period * 12;
+                var maturity = 0;
 
-        // Charts
-        var ctx = document.getElementById('lumpsum-line-chart').getContext('2d');
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: Array.from({length: period}, (_, i) => i + 1),
-                datasets: [{
-                    label: 'Growth',
-                    data: Array.from({length: period}, (_, i) => compoundInterest(principal, rate, i+1, freq)),
-                    borderColor: '#43e97b',
-                    fill: false
-                }]
-            }
-        });
-    });
+                for (var i = 1; i <= months; i++) {
+                    maturity += investment * Math.pow(1 + rate / 100 / 12, months - i + 1);
+                }
+
+                $('#sip-result').html('Maturity Amount: ' + formatCurrency(maturity));
+
+                // Charts
+                drawLineChart('sip-line-chart', Array.from({length: months}, (_, i) => i + 1),
+                    Array.from({length: months}, (_, i) => investment * (i + 1)), 'SIP Growth');
+
+                var invested = investment * months;
+                var returns = maturity - invested;
+                drawPieChart('sip-pie-chart', ['Invested', 'Returns'], [invested, returns]);
+            });
+        }
+
+        /** --------- Lumpsum Calculator --------- */
+        if (calcId === 'lumpsum-calculator') {
+            $('#fcs-calc-lumpsum').on('click', function() {
+                var principal = parseFloat($('#lumpsum-amount').val()) || 0;
+                var rate = parseFloat($('#lumpsum-return').val()) || 0;
+                var period = parseFloat($('#lumpsum-period').val()) || 0;
+                var freq = 1; // yearly compounding
+                var maturity = compoundInterest(principal, rate, period, freq);
+
+                $('#lumpsum-result').html('Maturity Amount: ' + formatCurrency(maturity));
+
+                var labels = Array.from({length: period}, (_, i) => i + 1);
+                var data = labels.map(y => compoundInterest(principal, rate, y, freq));
+                drawLineChart('lumpsum-line-chart', labels, data, 'Growth');
+            });
+        }
+
+        /** --------- Additional Calculators Placeholder --------- */
+        // Repeat similar structure for Loan, Goal Planner, STP, SWP, FD, RD, etc.
+        // Example:
+        // if(calcId === 'loan-calculator') { ... }
+    }
 
     /** -----------------------------
-     * Fallback for missing Chart.js
+     * Fallback if Chart.js is missing
      * -----------------------------
      */
     if (typeof Chart === 'undefined') {
         console.warn('Chart.js not loaded. Charts will not render.');
     }
+
 });
