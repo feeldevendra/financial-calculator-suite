@@ -1,0 +1,47 @@
+<div class="fcs-calculator-template">
+    <h2>Compare SIPs</h2>
+
+    <!-- SIP Input Form -->
+    <div class="fcs-input-group">
+        <label>Monthly Investment (₹)</label>
+        <input type="number" id="compare-sip-investment" placeholder="Enter monthly SIP amount" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Expected Return (%)</label>
+        <input type="number" id="compare-sip-return" placeholder="Enter expected annual return" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Investment Period (Years)</label>
+        <input type="number" id="compare-sip-period" placeholder="Enter period in years" />
+    </div>
+
+    <button id="fcs-add-sip">Add SIP</button>
+
+    <!-- Table for Added SIPs -->
+    <table class="fcs-table" id="compare-sip-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Monthly Investment</th>
+                <th>Return (%)</th>
+                <th>Period (Years)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows added dynamically -->
+        </tbody>
+    </table>
+
+    <!-- Compare Button -->
+    <button id="fcs-compare-sip">Compare SIPs</button>
+
+    <!-- Result -->
+    <div id="compare-sip-result" style="margin-top:20px; font-weight:bold;"></div>
+
+    <!-- Charts -->
+    <canvas id="compare-sip-line-chart"></canvas>
+    <canvas id="compare-sip-pie-chart"></canvas>
+</div>
