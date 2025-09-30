@@ -1,0 +1,46 @@
+<div class="fcs-calculator-template">
+    <h2>FD Calculator</h2>
+
+    <!-- Inputs -->
+    <div class="fcs-input-group">
+        <label>FD Amount (₹)</label>
+        <input type="number" id="fd-amount" placeholder="Enter deposit amount" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Rate of Interest (%)</label>
+        <input type="number" id="fd-rate" placeholder="Annual interest rate" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>FD Start Date</label>
+        <input type="date" id="fd-start-date" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Type of FD</label>
+        <select id="fd-type">
+            <option value="reinvestment">Reinvestment / Cumulative</option>
+            <option value="shortterm">Short Term FD</option>
+            <option value="monthly">Monthly Payout</option>
+            <option value="quarterly">Quarterly Payout</option>
+        </select>
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Deposit Term</label>
+        <input type="number" id="fd-term-years" placeholder="Years" style="width:32%;" />
+        <input type="number" id="fd-term-months" placeholder="Months" style="width:32%;" />
+        <input type="number" id="fd-term-days" placeholder="Days" style="width:32%;" />
+    </div>
+
+    <!-- Button -->
+    <button id="fcs-calc-fd">Calculate</button>
+
+    <!-- Results -->
+    <div id="fd-result" style="margin-top:20px; font-weight:bold;"></div>
+
+    <!-- Charts -->
+    <canvas id="fd-line-chart"></canvas>
+    <canvas id="fd-pie-chart"></canvas>
+</div>
