@@ -1,0 +1,47 @@
+<div class="fcs-calculator-template">
+    <h2>Loan Calculator</h2>
+
+    <!-- Calculation Type -->
+    <div class="fcs-input-group">
+        <label>Calculation Type</label>
+        <select id="loan-calc-type">
+            <option value="emi">Calculate EMI</option>
+            <option value="loan">Calculate Loan Amount</option>
+            <option value="tenure">Calculate Loan Tenure</option>
+        </select>
+    </div>
+
+    <!-- Loan Amount -->
+    <div class="fcs-input-group">
+        <label>Loan Amount (₹)</label>
+        <input type="number" id="loan-amount" placeholder="Enter loan amount" />
+    </div>
+
+    <!-- Interest Rate -->
+    <div class="fcs-input-group">
+        <label>Interest Rate (%)</label>
+        <input type="number" id="loan-interest" placeholder="Enter annual interest rate" />
+    </div>
+
+    <!-- Loan Tenure -->
+    <div class="fcs-input-group">
+        <label>Loan Tenure</label>
+        <input type="number" id="loan-tenure" placeholder="Enter tenure" />
+        <select id="loan-tenure-type">
+            <option value="year">Years</option>
+            <option value="month">Months</option>
+        </select>
+    </div>
+
+    <!-- Buttons -->
+    <div class="fcs-input-group">
+        <button id="fcs-calc-loan">Calculate</button>
+        <button id="fcs-reset-loan" type="reset">Reset</button>
+    </div>
+
+    <!-- Result Display -->
+    <div id="loan-result" style="margin-top:20px; font-weight:bold;"></div>
+
+    <!-- Chart -->
+    <canvas id="loan-chart"></canvas>
+</div>
