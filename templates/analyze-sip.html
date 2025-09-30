@@ -1,0 +1,29 @@
+<div class="fcs-calculator-template">
+    <h2>Analyze Your SIP</h2>
+
+    <!-- Inputs -->
+    <div class="fcs-input-group">
+        <label>Monthly Investment (₹)</label>
+        <input type="number" id="analyze-sip-investment" placeholder="Enter monthly SIP amount" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Current Value of Total Investment (₹)</label>
+        <input type="number" id="analyze-sip-current" placeholder="Enter current value" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>SIP Start Date</label>
+        <input type="date" id="analyze-sip-date" />
+    </div>
+
+    <!-- Button -->
+    <button id="fcs-calc-analyze-sip">Calculate</button>
+
+    <!-- Result -->
+    <div id="analyze-sip-result" style="margin-top:20px; font-weight:bold;"></div>
+
+    <!-- Charts -->
+    <canvas id="analyze-sip-line-chart"></canvas>
+    <canvas id="analyze-sip-pie-chart"></canvas>
+</div>
