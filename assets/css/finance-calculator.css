@@ -1,288 +1,218 @@
-/* ================================================================
-   Financial Calculator Suite - CSS
-   Author: Devendra Lodhi / FlyBoost
-   Portfolio: www.devendra.bio
-   Agency: www.flyboost.in
-   File: finance-calculator.css
-================================================================ */
+/* ==============================
+   Financial Calculator Suite CSS
+   Author: Devendra Lodhi
+   ============================== */
 
-/* ----- Root Variables ----- */
+/* Root variables for brand colors and spacing */
 :root {
-  --fcs-primary: #28a745;       /* Brand Green */
-  --fcs-accent: #34c759;        /* Accent */
-  --fcs-bg: #ffffff;
-  --fcs-bg-dark: #f5f5f5;
-  --fcs-text: #333333;
-  --fcs-radius: 12px;
-  --fcs-shadow: 0 4px 15px rgba(0,0,0,0.12);
-  --fcs-transition: 0.3s ease;
-  --fcs-font: 'Inter', Arial, sans-serif;
+    --fcs-primary-color: #43e97b;
+    --fcs-gradient: linear-gradient(135deg, #4facfe, #43e97b, #38f9d7);
+    --fcs-radius: 12px;
+    --fcs-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --fcs-font: 'Roboto', sans-serif;
 }
 
-/* ----- Wrapper ----- */
-.fcs-wrapper {
-  font-family: var(--fcs-font);
-  color: var(--fcs-text);
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+/* General container */
+.fcs-container {
+    font-family: var(--fcs-font);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-/* ----- Header / Search ----- */
-.fcs-header {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+/* Search bar and category buttons */
+.fcs-search-filter {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 10px;
 }
 
-.fcs-search {
-  flex: 1 1 300px;
-  display: flex;
-  gap: 8px;
+#fcs-search {
+    flex: 1;
+    min-width: 250px;
+    padding: 10px 15px;
+    border-radius: var(--fcs-radius);
+    border: 1px solid #ccc;
+    font-size: 16px;
+    transition: border 0.3s;
 }
 
-.fcs-search input[type="search"] {
-  flex: 1;
-  padding: 8px 12px;
-  border: 1px solid #ccc;
-  border-radius: var(--fcs-radius);
-  transition: border var(--fcs-transition);
+#fcs-search:focus {
+    border-color: var(--fcs-primary-color);
+    outline: none;
+    box-shadow: 0 0 10px rgba(67, 233, 123, 0.3);
 }
 
-.fcs-search input[type="search"]:focus {
-  border-color: var(--fcs-primary);
-  outline: none;
-}
-
-.fcs-search button {
-  background: var(--fcs-accent);
-  color: #fff;
-  border: none;
-  border-radius: var(--fcs-radius);
-  padding: 0 12px;
-  cursor: pointer;
-  font-size: 18px;
-  transition: background var(--fcs-transition);
-}
-
-.fcs-search button:hover {
-  background: var(--fcs-primary);
-}
-
-/* ----- Category Buttons ----- */
-.fcs-categories {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
+.fcs-category-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .fcs-cat-btn {
-  padding: 6px 16px;
-  border-radius: var(--fcs-radius);
-  border: 1px solid var(--fcs-primary);
-  background: var(--fcs-bg);
-  color: var(--fcs-primary);
-  cursor: pointer;
-  transition: all var(--fcs-transition);
+    padding: 10px 18px;
+    border: none;
+    border-radius: var(--fcs-radius);
+    background: var(--fcs-gradient);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 500;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.fcs-cat-btn.active,
 .fcs-cat-btn:hover {
-  background: var(--fcs-primary);
-  color: #fff;
+    transform: translateY(-3px);
+    box-shadow: var(--fcs-shadow);
 }
 
-/* ----- Grid Layout ----- */
-.fcs-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
+/* Calculator grid */
+.fcs-calculator-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
 }
 
-.fcs-grid-item {
-  background: var(--fcs-bg);
-  border-radius: var(--fcs-radius);
-  box-shadow: var(--fcs-shadow);
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  cursor: pointer;
-  transition: transform var(--fcs-transition), box-shadow var(--fcs-transition);
+/* Calculator card */
+.fcs-calculator-card {
+    background: #fff;
+    border-radius: var(--fcs-radius);
+    box-shadow: var(--fcs-shadow);
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.fcs-grid-item:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+.fcs-calculator-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
 }
 
-.fcs-icon {
-  font-size: 28px;
-  margin-bottom: 8px;
+.fcs-calculator-card h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
 }
 
-.fcs-title {
-  font-weight: 600;
-  font-size: 16px;
+.fcs-calculator-card p {
+    font-size: 14px;
+    color: #666;
 }
 
-/* ----- Modal Overlay ----- */
-.fcs-modal-overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.5);
-  z-index: 9999;
-  justify-content: center;
-  align-items: center;
-}
-
-.fcs-modal-overlay.active {
-  display: flex;
-}
-
+/* Modal */
 .fcs-modal {
-  background: var(--fcs-bg);
-  border-radius: var(--fcs-radius);
-  max-width: 700px;
-  width: 90%;
-  padding: 25px;
-  position: relative;
-  box-shadow: var(--fcs-shadow);
-  animation: fadeIn 0.4s ease;
-  max-height: 90vh;
-  overflow-y: auto;
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    animation: fadeIn 0.3s ease-in-out;
 }
 
-/* ----- Modal Close Button ----- */
-.fcs-modal-close {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  border: none;
-  background: var(--fcs-accent);
-  color: #fff;
-  font-size: 20px;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background var(--fcs-transition);
+.fcs-modal-content {
+    background: #fff;
+    margin: 50px auto;
+    border-radius: var(--fcs-radius);
+    padding: 30px;
+    max-width: 800px;
+    position: relative;
+    box-shadow: var(--fcs-shadow);
+    animation: slideIn 0.3s ease-in-out;
 }
 
-.fcs-modal-close:hover {
-  background: var(--fcs-primary);
+/* Close button */
+.fcs-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.2s;
 }
 
-/* ----- Forms ----- */
-.fcs-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.fcs-close:hover {
+    color: var(--fcs-primary-color);
 }
 
-.fcs-form label {
-  display: flex;
-  flex-direction: column;
-  font-size: 14px;
+/* Modal body */
+.fcs-modal-body {
+    margin-top: 20px;
 }
 
-.fcs-form input,
-.fcs-form select {
-  padding: 6px 10px;
-  border-radius: var(--fcs-radius);
-  border: 1px solid #ccc;
-  font-size: 14px;
-  transition: border var(--fcs-transition);
+/* Input fields */
+.fcs-modal input[type="text"],
+.fcs-modal input[type="number"],
+.fcs-modal select {
+    width: 100%;
+    padding: 10px 12px;
+    margin: 8px 0;
+    border-radius: var(--fcs-radius);
+    border: 1px solid #ccc;
+    font-size: 15px;
 }
 
-.fcs-form input:focus,
-.fcs-form select:focus {
-  border-color: var(--fcs-primary);
-  outline: none;
+.fcs-modal input[type="text"]:focus,
+.fcs-modal input[type="number"]:focus,
+.fcs-modal select:focus {
+    border-color: var(--fcs-primary-color);
+    outline: none;
+    box-shadow: 0 0 8px rgba(67, 233, 123, 0.3);
 }
 
-.fcs-calc-btn {
-  background: var(--fcs-primary);
-  color: #fff;
-  border: none;
-  border-radius: var(--fcs-radius);
-  padding: 10px 16px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background var(--fcs-transition);
+/* Buttons inside modal */
+.fcs-modal button {
+    background: var(--fcs-gradient);
+    color: #fff;
+    border: none;
+    border-radius: var(--fcs-radius);
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.fcs-calc-btn:hover {
-  background: var(--fcs-accent);
+.fcs-modal button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--fcs-shadow);
 }
 
-/* ----- Advanced Options ----- */
-.fcs-advanced {
-  background: var(--fcs-bg-dark);
-  padding: 12px;
-  border-radius: var(--fcs-radius);
-  margin-top: 8px;
+/* Charts */
+.fcs-modal canvas {
+    margin-top: 20px;
+    width: 100% !important;
+    max-height: 400px;
 }
 
-/* ----- Results ----- */
-.fcs-results {
-  margin-top: 16px;
-  font-weight: 600;
-  font-size: 15px;
-  color: var(--fcs-primary);
-}
-
-/* ----- Chart Canvas ----- */
-.fcs-chart {
-  margin-top: 16px;
-  width: 100%;
-  max-height: 300px;
-}
-
-/* ----- Goal Planner Tabs ----- */
-.fcs-goal-planner {
-  margin-top: 20px;
-}
-
-.fcs-goal-tabs {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.fcs-goal-select {
-  padding: 6px 10px;
-  border-radius: var(--fcs-radius);
-  border: 1px solid #ccc;
-  font-size: 14px;
-}
-
-/* ----- Fade-in Animation ----- */
+/* Animations */
 @keyframes fadeIn {
-  0% { opacity: 0; transform: translateY(-10px);}
-  100% { opacity: 1; transform: translateY(0);}
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
 
-/* ----- Responsive ----- */
+@keyframes slideIn {
+    from {transform: translateY(-50px); opacity: 0;}
+    to {transform: translateY(0); opacity: 1;}
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-  .fcs-header {
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .fcs-categories {
-    justify-content: center;
-  }
-
-  .fcs-grid {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  }
+    .fcs-search-filter {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .fcs-modal-content {
+        margin: 20px;
+        padding: 20px;
+    }
 }
+
+
