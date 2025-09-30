@@ -1,0 +1,52 @@
+<div class="fcs-calculator-template">
+    <h2>Loan + SIP Calculator</h2>
+
+    <!-- Step 1: Loan Inputs -->
+    <div class="fcs-input-group">
+        <label>Loan Amount (₹)</label>
+        <input type="number" id="loan-sip-loan-amount" placeholder="Enter loan amount" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Loan Interest Rate (%)</label>
+        <input type="number" id="loan-sip-loan-rate" placeholder="Annual loan interest" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Loan Tenure</label>
+        <input type="number" id="loan-sip-loan-tenure" placeholder="Enter duration" />
+        <select id="loan-sip-loan-tenure-type">
+            <option value="year">Years</option>
+            <option value="month">Months</option>
+        </select>
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Loan Start Date</label>
+        <input type="date" id="loan-sip-loan-start" />
+    </div>
+
+    <!-- Step 2: SIP Inputs -->
+    <div class="fcs-input-group">
+        <label>Max EMI You Can Afford (₹)</label>
+        <input type="number" id="loan-sip-max-emi" placeholder="Enter affordable EMI" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Expected SIP Return (%)</label>
+        <input type="number" id="loan-sip-sip-return" placeholder="Expected return on SIP" />
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="fcs-button-group">
+        <button id="fcs-calc-loan-sip">Calculate</button>
+        <button id="fcs-reset-loan-sip">Reset</button>
+    </div>
+
+    <!-- Results -->
+    <div id="loan-sip-result" style="margin-top:20px; font-weight:bold;"></div>
+
+    <!-- Charts -->
+    <canvas id="loan-sip-line-chart"></canvas>
+    <canvas id="loan-sip-pie-chart"></canvas>
+</div>
