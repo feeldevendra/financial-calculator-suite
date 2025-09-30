@@ -1,0 +1,44 @@
+<div class="fcs-calculator-template">
+    <h2>STP Calculator</h2>
+
+    <!-- Inputs -->
+    <div class="fcs-input-group">
+        <label>STP Amount (₹)</label>
+        <input type="number" id="stp-amount" placeholder="Enter transfer amount per installment" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Initial Investment (₹)</label>
+        <input type="number" id="stp-initial" placeholder="Enter initial investment" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>No. of Installments</label>
+        <input type="number" id="stp-installments" placeholder="Enter number of transfers" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Rate of Return - Transferor (%)</label>
+        <input type="number" id="stp-return-transferor" placeholder="Annual return of source fund" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>Rate of Return - Transferee (%)</label>
+        <input type="number" id="stp-return-transferee" placeholder="Annual return of destination fund" />
+    </div>
+
+    <div class="fcs-input-group">
+        <label>STP Start Date</label>
+        <input type="date" id="stp-start-date" />
+    </div>
+
+    <!-- Button -->
+    <button id="fcs-calc-stp">Calculate</button>
+
+    <!-- Results -->
+    <div id="stp-result" style="margin-top:20px; font-weight:bold;"></div>
+
+    <!-- Charts -->
+    <canvas id="stp-line-chart"></canvas>
+    <canvas id="stp-pie-chart"></canvas>
+</div>
